@@ -1,8 +1,15 @@
 # RecordingJoystick
-This is a (nearly) plug-and-play autonomous recording feature for First Robotics Competition robots coded in Java. It emulates a Joystick, so it requires no major integrations with existing code to enable an FRC team to record and playback automonous programs using joystick commands.
+This is a (nearly) plug-and-play autonomous recording feature for First Robotics Competition robots coded in Java. It emulates a Joystick, and therefore can be simply integrated with existing code to enable an FRC team to record and playback automonous programs using joystick inputs.
 
-It works by wrapping a Joystick object, which can then either record states of the Driver Station joystick and save them to a file,
-or playback previously-saved states from a file (during the autonomous period.)
+The rationale in making this was not to create the most robust or precise autonomous-recording method, but this class can add recorded auto programs to nearly any Java-programmed FRC robot. However, if your normal joystick inputs are fed into closed-loop control systems (i.e. encoder-based PID control systems for drive wheel or arm RPM, etc.), this is likely to have the precision of normal closed-loop auto programs. 
+
+<strong>How it works:</strong>
+
+It operates by wrapping a Joystick object, which can then either record states of the Driver Station joystick and save them to a file, or playback previously-saved states from a file (during the autonomous period.)
+
+The joystick records all axes, POVs, and buttons on the specified joystick and will play them back such that calls to getX(), getRawButton(), etc. return values as if recieving inputs from the joystick attached to the Driver Station.
+
+As long as your joystick can be interfaced via <coce>edu.wpi.first.wpilibj.Joystick</code> OR extends GenericHID, it can be replaced with a RecordingJoystick for this functionality. There are also constants in the class that can be modified to accomodate its number of axis or buttons.
 
 <strong>Integration:</strong>
 
